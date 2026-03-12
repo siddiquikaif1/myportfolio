@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Muhammad Kaif Siddiqui | Food Technologist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0A0A08;
+  --surface: #111110;
+  --surface2: #181816;
+  --border: rgba(255,255,255,0.08);
+  --border-bright: rgba(255,255,255,0.18);
+  --text: #F0EDE6;
+  --text-muted: rgba(240,237,230,0.45);
+  --text-sub: rgba(240,237,230,0.25);
+  --gold: #C8A96E;
+  --gold-light: #E8C98A;
+  --gold-dim: rgba(200,169,110,0.15);
+  --accent: #C8A96E;
+  --nav-bg: rgba(10,10,8,0.85);
+  --orb1: rgba(200,169,110,0.12);
+  --orb2: rgba(74,124,94,0.1);
+  --grid-line: rgba(200,169,110,0.04);
+  --marquee-text: #0A0A08;
+}
+
+/* ── THEME: LIGHT CREAM ── */
+[data-theme="cream"] {
+  --bg: #FAF7F2;
+  --surface: #FFFFFF;
+  --surface2: #F3EEE6;
+  --border: rgba(0,0,0,0.08);
+  --border-bright: rgba(0,0,0,0.16);
+  --text: #1C1410;
+  --text-muted: rgba(28,20,16,0.5);
+  --text-sub: rgba(28,20,16,0.3);
+  --gold: #A8722A;
+  --gold-light: #C4913E;
+  --gold-dim: rgba(168,114,42,0.1);
+  --accent: #A8722A;
+  --nav-bg: rgba(250,247,242,0.92);
+  --orb1: rgba(168,114,42,0.08);
+  --orb2: rgba(74,124,94,0.07);
+  --grid-line: rgba(168,114,42,0.05);
+  --marquee-text: #FAF7F2;
+}
+
+/* ── THEME: FOREST ── */
+[data-theme="forest"] {
+  --bg: #0D1410;
+  --surface: #131A15;
+  --surface2: #1A2420;
+  --border: rgba(255,255,255,0.07);
+  --border-bright: rgba(255,255,255,0.14);
+  --text: #E8F0E4;
+  --text-muted: rgba(232,240,228,0.45);
+  --text-sub: rgba(232,240,228,0.25);
+  --gold: #6AAF7C;
+  --gold-light: #8FCC9E;
+  --gold-dim: rgba(106,175,124,0.14);
+  --accent: #6AAF7C;
+  --nav-bg: rgba(13,20,16,0.88);
+  --orb1: rgba(106,175,124,0.12);
+  --orb2: rgba(200,169,110,0.08);
+  --grid-line: rgba(106,175,124,0.04);
+  --marquee-text: #0D1410;
+}
+
+/* ── THEME: OCEAN ── */
+[data-theme="ocean"] {
+  --bg: #090C14;
+  --surface: #0E1320;
+  --surface2: #141B2E;
+  --border: rgba(255,255,255,0.07);
+  --border-bright: rgba(255,255,255,0.15);
+  --text: #E4EBF5;
+  --text-muted: rgba(228,235,245,0.45);
+  --text-sub: rgba(228,235,245,0.25);
+  --gold: #5B9FD4;
+  --gold-light: #7DBCE8;
+  --gold-dim: rgba(91,159,212,0.14);
+  --accent: #5B9FD4;
+  --nav-bg: rgba(9,12,20,0.88);
+  --orb1: rgba(91,159,212,0.12);
+  --orb2: rgba(74,124,200,0.1);
+  --grid-line: rgba(91,159,212,0.04);
+  --marquee-text: #090C14;
+}
+
+/* ── THEME: CRIMSON ── */
+[data-theme="crimson"] {
+  --bg: #120808;
+  --surface: #1A0E0E;
+  --surface2: #221414;
+  --border: rgba(255,255,255,0.07);
+  --border-bright: rgba(255,255,255,0.15);
+  --text: #F5EAEA;
+  --text-muted: rgba(245,234,234,0.45);
+  --text-sub: rgba(245,234,234,0.25);
+  --gold: #C4503A;
+  --gold-light: #E07060;
+  --gold-dim: rgba(196,80,58,0.14);
+  --accent: #C4503A;
+  --nav-bg: rgba(18,8,8,0.88);
+  --orb1: rgba(196,80,58,0.12);
+  --orb2: rgba(180,60,40,0.08);
+  --grid-line: rgba(196,80,58,0.04);
+  --marquee-text: #120808;
+}
+
+/* ── THEME SWITCHER UI ── */
+.theme-switcher {
+  position: fixed; bottom: 2rem; left: 2rem; z-index: 500;
+  display: flex; flex-direction: column; align-items: flex-start; gap: .5rem;
+}
+.theme-toggle-btn {
+  background: var(--surface); border: 1px solid var(--border-bright);
+  color: var(--text-muted); padding: .6rem 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase;
+  cursor: none; display: flex; align-items: center; gap: .5rem;
+  transition: all .25s; white-space: nowrap;
+  backdrop-filter: blur(12px);
+}
+.theme-toggle-btn:hover { border-color: var(--gold); color: var(--gold); }
+.theme-toggle-btn .t-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--gold); flex-shrink: 0;
+}
+.theme-palette {
+  background: var(--surface); border: 1px solid var(--border-bright);
+  padding: 1rem; display: flex; flex-direction: column; gap: .5rem;
+  opacity: 0; pointer-events: none; transform: translateY(8px);
+  transition: opacity .25s, transform .25s;
+  backdrop-filter: blur(16px);
+  min-width: 200px;
+}
+.theme-palette.open { opacity: 1; pointer-events: all; transform: none; }
+.theme-opt {
+  display: flex; align-items: center; gap: .8rem;
+  padding: .55rem .7rem; cursor: none;
+  border: 1px solid transparent;
+  transition: all .2s; font-size: 0.75rem; font-weight: 600;
+  color: var(--text-muted); letter-spacing: 0.04em;
+}
+.theme-opt:hover { border-color: var(--border-bright); color: var(--text); background: var(--surface2); }
+.theme-opt.active { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
+.theme-swatch {
+  width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0;
+  border: 1.5px solid rgba(255,255,255,0.15);
+}
+.palette-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem; letter-spacing: 0.15em; color: var(--text-sub);
+  text-transform: uppercase; margin-bottom: .3rem; padding: 0 .2rem;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Syne', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  cursor: none;
+  transition: background .4s, color .4s;
+}
+
+/* ── CURSOR ── */
+.cursor {
+  position: fixed; width: 8px; height: 8px; border-radius: 50%;
+  background: var(--gold); pointer-events: none; z-index: 9999;
+  transform: translate(-50%,-50%);
+  transition: width .2s, height .2s, opacity .2s;
+  mix-blend-mode: difference;
+}
+.cursor-ring {
+  position: fixed; width: 36px; height: 36px; border-radius: 50%;
+  border: 1px solid rgba(200,169,110,0.5); pointer-events: none; z-index: 9998;
+  transform: translate(-50%,-50%);
+  transition: all .12s ease;
+}
+body:hover .cursor { opacity: 1; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.4rem 3.5rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--nav-bg);
+  backdrop-filter: blur(20px);
+  transition: background .4s;
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem; font-weight: 600; letter-spacing: 0.04em;
+  color: var(--text);
+}
+.nav-logo .dot { color: var(--gold); }
+.nav-links { display: flex; gap: 2.2rem; list-style: none; }
+.nav-links a {
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--text-muted); text-decoration: none;
+  transition: color .2s; position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -3px; left: 0;
+  width: 0; height: 1px; background: var(--gold);
+  transition: width .3s;
+}
+.nav-links a:hover { color: var(--gold); }
+.nav-links a:hover::after { width: 100%; }
+.nav-cta {
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--bg);
+  background: var(--gold); padding: .55rem 1.5rem;
+  border-radius: 0; text-decoration: none;
+  transition: background .2s, transform .2s;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+.nav-cta:hover { background: var(--gold-light); }
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+.hero-left {
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 8rem 4rem 5rem;
+  position: relative; z-index: 2;
+  border-right: 1px solid var(--border);
+}
+.hero-right {
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 8rem 4rem 5rem;
+  position: relative; z-index: 2;
+}
+
+/* animated bg */
+.hero-grid {
+  position: absolute; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: gridShift 20s linear infinite;
+}
+@keyframes gridShift {
+  0% { background-position: 0 0, 0 0; }
+  100% { background-position: 60px 60px, 60px 60px; }
+}
+.hero-orb {
+  position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none;
+}
+.hero-orb-1 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, var(--orb1), transparent 70%);
+  top: -100px; left: -100px; animation: orbFloat 8s ease-in-out infinite;
+}
+.hero-orb-2 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, var(--orb2), transparent 70%);
+  bottom: -50px; right: 20%; animation: orbFloat 11s ease-in-out infinite reverse;
+}
+@keyframes orbFloat {
+  0%,100% { transform: translate(0,0); }
+  50% { transform: translate(30px,-40px); }
+}
+
+.hero-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem; letter-spacing: 0.14em; color: var(--gold);
+  text-transform: uppercase; margin-bottom: 1.5rem;
+  display: flex; align-items: center; gap: .7rem;
+  opacity: 0; animation: fadeUpIn .8s .1s forwards;
+}
+.hero-eyebrow::before {
+  content: ''; width: 24px; height: 1px; background: var(--gold);
+}
+.hero-name-wrap {
+  overflow: hidden; margin-bottom: 0.2rem;
+}
+.hero-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(4rem, 7vw, 7rem);
+  font-weight: 300; line-height: 0.95; letter-spacing: -0.02em;
+  color: var(--text);
+  display: block;
+  opacity: 0; animation: fadeUpIn .9s .2s forwards;
+}
+.hero-name-em {
+  font-style: italic; color: var(--gold);
+  opacity: 0; animation: fadeUpIn .9s .35s forwards;
+}
+.hero-subtitle {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem; letter-spacing: 0.1em; color: var(--text-muted);
+  text-transform: uppercase; margin: 1.8rem 0 2.2rem;
+  opacity: 0; animation: fadeUpIn .8s .5s forwards;
+}
+.hero-desc {
+  font-size: 1rem; line-height: 1.8; color: var(--text-muted);
+  max-width: 440px; margin-bottom: 2.8rem;
+  font-weight: 400;
+  opacity: 0; animation: fadeUpIn .8s .6s forwards;
+}
+.hero-actions {
+  display: flex; gap: .9rem;
+  opacity: 0; animation: fadeUpIn .8s .75s forwards;
+}
+.btn-gold {
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--bg); background: var(--gold);
+  padding: 1rem 2.2rem; text-decoration: none;
+  clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+  transition: background .25s, transform .25s;
+  display: inline-flex; align-items: center; gap: .6rem;
+}
+.btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+.btn-outline {
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--text-muted); border: 1px solid var(--border-bright);
+  padding: 1rem 2.2rem; text-decoration: none;
+  transition: color .25s, border-color .25s;
+  display: inline-flex; align-items: center; gap: .6rem;
+}
+.btn-outline:hover { color: var(--gold); border-color: var(--gold); }
+
+/* right side hero */
+.hero-stats {
+  display: flex; flex-direction: column; gap: 1px;
+  opacity: 0; animation: fadeLeftIn .9s .4s forwards;
+}
+.stat-row {
+  display: flex; align-items: center; gap: 1.5rem;
+  padding: 1.4rem 0; border-bottom: 1px solid var(--border);
+}
+.stat-row:first-child { border-top: 1px solid var(--border); }
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.8rem; font-weight: 300; color: var(--gold);
+  line-height: 1; min-width: 90px;
+}
+.stat-text h4 {
+  font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text); margin-bottom: .2rem;
+}
+.stat-text p { font-size: 0.75rem; color: var(--text-muted); }
+
+.hero-cards { display: flex; flex-direction: column; gap: .8rem; opacity: 0; animation: fadeLeftIn .9s .55s forwards; }
+.hero-mini-card {
+  background: var(--surface); border: 1px solid var(--border);
+  padding: 1.2rem 1.4rem; position: relative; overflow: hidden;
+  transition: border-color .3s;
+}
+.hero-mini-card::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 2px; background: var(--gold);
+  transform: scaleY(0); transform-origin: bottom;
+  transition: transform .4s;
+}
+.hero-mini-card:hover::before { transform: scaleY(1); }
+.hero-mini-card:hover { border-color: rgba(200,169,110,0.3); }
+.hero-mini-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem; letter-spacing: 0.14em; color: var(--gold);
+  text-transform: uppercase; margin-bottom: .5rem;
+}
+.hero-mini-card h3 { font-size: 0.9rem; font-weight: 600; color: var(--text); margin-bottom: .2rem; }
+.hero-mini-card p { font-size: 0.78rem; color: var(--text-muted); }
+.hero-mini-pill {
+  display: inline-block; margin-top: .6rem;
+  background: var(--gold-dim); color: var(--gold);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem; padding: .25rem .7rem; letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+@keyframes fadeUpIn {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes fadeLeftIn {
+  from { opacity: 0; transform: translateX(28px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ── MARQUEE ── */
+.marquee-bar {
+  background: var(--gold); padding: .7rem 0; overflow: hidden;
+  white-space: nowrap;
+}
+.marquee-track {
+  display: inline-block;
+  animation: marqueeScroll 22s linear infinite;
+}
+.marquee-track span {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--marquee-text);
+  padding: 0 2.5rem;
+}
+.marquee-track span::after { content: '✦'; margin-left: 2.5rem; }
+@keyframes marqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── SECTION BASE ── */
+section { padding: 6rem 3.5rem; }
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem; letter-spacing: 0.18em; color: var(--gold);
+  text-transform: uppercase;
+  display: flex; align-items: center; gap: .8rem;
+  margin-bottom: 1.2rem;
+}
+.section-label::before { content: ''; width: 20px; height: 1px; background: var(--gold); }
+.section-num {
+  color: var(--text-sub); font-size: 0.6rem;
+}
+h2.s-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.4rem, 4.5vw, 4rem);
+  font-weight: 300; line-height: 1.1;
+  color: var(--text); margin-bottom: 3rem;
+}
+h2.s-title em { font-style: italic; color: var(--gold); }
+h2.s-title strong { font-weight: 700; }
+
+/* ── ABOUT ── */
+#about {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 6rem;
+  align-items: start; background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.about-text p {
+  font-size: 1rem; line-height: 1.9; color: var(--text-muted);
+  margin-bottom: 1.3rem; font-weight: 400;
+}
+.skills-wrap { margin-top: 2rem; }
+.skills-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem; letter-spacing: 0.15em; color: var(--text-sub);
+  text-transform: uppercase; margin-bottom: 1rem;
+}
+.skills-list {
+  display: flex; flex-wrap: wrap; gap: .5rem;
+}
+.skill-chip {
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em;
+  color: var(--text-muted); background: transparent;
+  border: 1px solid var(--border);
+  padding: .45rem 1rem;
+  transition: all .25s; cursor: default;
+}
+.skill-chip:hover {
+  color: var(--gold); border-color: rgba(200,169,110,0.5);
+  background: var(--gold-dim);
+}
+
+/* timeline */
+.timeline { position: relative; padding-left: 1.5rem; }
+.timeline::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 1px; background: linear-gradient(to bottom, var(--gold), transparent);
+}
+.tl-item {
+  position: relative; padding: 0 0 3rem 2rem;
+}
+.tl-item:last-child { padding-bottom: 0; }
+.tl-dot {
+  position: absolute; left: -1.8rem; top: 6px;
+  width: 8px; height: 8px;
+  background: var(--bg); border: 1.5px solid var(--gold);
+  transform: rotate(45deg);
+}
+.tl-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem; letter-spacing: 0.12em; color: var(--gold);
+  text-transform: uppercase; margin-bottom: .4rem;
+}
+.tl-item h4 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem; font-weight: 600; color: var(--text);
+  margin-bottom: .3rem;
+}
+.tl-item p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+
+/* ── BLOG ── */
+#blog { background: var(--bg); }
+.blog-header-row {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: 3rem;
+}
+.write-new-btn {
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--bg);
+  background: var(--gold); border: none; cursor: none;
+  padding: .85rem 1.8rem;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  transition: background .25s;
+  display: flex; align-items: center; gap: .5rem;
+}
+.write-new-btn:hover { background: var(--gold-light); }
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+.blog-card {
+  background: var(--surface); padding: 2rem;
+  display: flex; flex-direction: column;
+  cursor: none; position: relative; overflow: hidden;
+  transition: background .3s;
+}
+.blog-card::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 2px; background: var(--gold);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .4s;
+}
+.blog-card:hover { background: var(--surface2); }
+.blog-card:hover::after { transform: scaleX(1); }
+.blog-card.featured { grid-row: span 2; }
+.bc-cat {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem; letter-spacing: 0.14em; color: var(--gold);
+  text-transform: uppercase; margin-bottom: 1rem;
+  display: flex; align-items: center; gap: .5rem;
+}
+.bc-cat::before { content: ''; width: 12px; height: 1px; background: var(--gold); }
+.bc-icon {
+  font-size: 2.5rem; margin-bottom: 1.2rem; opacity: .6;
+  transition: opacity .3s, transform .3s;
+}
+.blog-card.featured .bc-icon { font-size: 3.5rem; }
+.blog-card:hover .bc-icon { opacity: 1; transform: scale(1.1); }
+.bc-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem; font-weight: 600; line-height: 1.25;
+  color: var(--text); margin-bottom: .7rem; flex: 1;
+}
+.blog-card.featured .bc-title { font-size: 1.9rem; }
+.bc-excerpt { font-size: 0.82rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 1.2rem; }
+.bc-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: .9rem; border-top: 1px solid var(--border);
+}
+.bc-meta { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--text-sub); }
+.bc-read {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem; letter-spacing: 0.1em; color: var(--gold);
+  text-transform: uppercase;
+  display: flex; align-items: center; gap: .4rem;
+}
+.bc-read .arrow { transition: transform .3s; }
+.blog-card:hover .arrow { transform: translateX(4px); }
+
+/* modal */
+.modal-overlay {
+  display: none; position: fixed; inset: 0; z-index: 1000;
+  background: rgba(10,10,8,0.92); backdrop-filter: blur(12px);
+  align-items: center; justify-content: center; padding: 2rem;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--surface); border: 1px solid var(--border-bright);
+  width: 100%; max-width: 680px; max-height: 90vh; overflow-y: auto;
+  padding: 2.8rem;
+  animation: modalIn .35s ease;
+}
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: none; }
+}
+.modal-hd {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 2rem; padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.modal-hd h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem; font-weight: 600; color: var(--text);
+}
+.modal-close {
+  background: none; border: 1px solid var(--border); color: var(--text-muted);
+  width: 36px; height: 36px; cursor: none;
+  font-size: 1rem; display: flex; align-items: center; justify-content: center;
+  transition: all .2s;
+}
+.modal-close:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
+.form-group { margin-bottom: 1.3rem; }
+.form-group label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem; letter-spacing: 0.14em; color: var(--text-sub);
+  text-transform: uppercase; display: block; margin-bottom: .5rem;
+}
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%; background: var(--bg);
+  border: 1px solid var(--border); border-bottom: 1px solid var(--border-bright);
+  padding: .9rem 1rem;
+  font-family: 'Syne', sans-serif; font-size: 0.9rem;
+  color: var(--text); outline: none; transition: border-color .2s;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+  border-color: var(--gold); border-bottom-color: var(--gold);
+}
+.form-group select option { background: var(--surface); }
+.form-group textarea { min-height: 200px; resize: vertical; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.publish-btn {
+  width: 100%; background: var(--gold); color: var(--bg);
+  border: none; cursor: none; font-family: 'Syne', sans-serif;
+  font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; padding: 1.1rem;
+  margin-top: .5rem; transition: background .25s;
+}
+.publish-btn:hover { background: var(--gold-light); }
+
+/* blog full view */
+.blog-full {
+  display: none; position: fixed; inset: 0; z-index: 999;
+  background: var(--bg); overflow-y: auto; padding: 7rem 2rem 5rem;
+}
+.blog-full.open { display: block; }
+.blog-full-inner { max-width: 700px; margin: 0 auto; }
+.back-btn {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem; letter-spacing: 0.12em; color: var(--gold);
+  text-transform: uppercase; background: none; border: none;
+  cursor: none; display: flex; align-items: center; gap: .5rem;
+  margin-bottom: 3rem; transition: gap .3s;
+}
+.back-btn:hover { gap: .9rem; }
+.bf-cat {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem; letter-spacing: 0.14em; color: var(--gold);
+  text-transform: uppercase; margin-bottom: 1rem;
+}
+.blog-full h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 300;
+  color: var(--text); line-height: 1.15; margin-bottom: 1.2rem;
+}
+.bf-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem; color: var(--text-sub); margin-bottom: 3rem;
+  padding-bottom: 2rem; border-bottom: 1px solid var(--border);
+}
+.bf-content { font-size: 1.05rem; line-height: 1.95; color: rgba(240,237,230,0.72); }
+.bf-content p { margin-bottom: 1.6rem; }
+.bf-content h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem; font-weight: 600; color: var(--text);
+  margin: 2.5rem 0 1rem; font-style: italic;
+}
+
+/* ── GALLERY ── */
+#visuals {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.upload-zone {
+  border: 1px dashed rgba(200,169,110,0.3);
+  padding: 2rem; text-align: center;
+  margin-bottom: 2.5rem; cursor: none;
+  transition: border-color .3s, background .3s;
+  color: var(--text-muted);
+}
+.upload-zone:hover { border-color: var(--gold); background: var(--gold-dim); }
+.upload-zone input { display: none; }
+.upload-icon { font-size: 2rem; margin-bottom: .5rem; }
+.upload-zone p { font-size: 0.82rem; }
+.upload-zone small { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--text-sub); }
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px; background: var(--border);
+}
+.g-item {
+  aspect-ratio: 1; overflow: hidden; position: relative;
+  background: var(--surface2); cursor: none;
+}
+.g-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+.g-item:hover img { transform: scale(1.06); }
+.g-overlay {
+  position: absolute; inset: 0; background: rgba(10,10,8,0);
+  display: flex; align-items: flex-end; padding: 1rem;
+  transition: background .3s;
+}
+.g-item:hover .g-overlay { background: rgba(10,10,8,0.55); }
+.g-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem; letter-spacing: 0.1em; color: #fff;
+  text-transform: uppercase; opacity: 0; transform: translateY(6px);
+  transition: all .3s;
+}
+.g-item:hover .g-label { opacity: 1; transform: none; }
+.g-placeholder {
+  aspect-ratio: 1; background: var(--surface2);
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: .4rem;
+  color: var(--text-sub); font-size: 2rem;
+  border: 1px dashed rgba(255,255,255,0.05);
+}
+.g-placeholder span { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: .1em; text-transform: uppercase; }
+
+/* ── CERTS ── */
+#certifications { background: var(--bg); }
+.cert-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px;
+  background: var(--border); border: 1px solid var(--border);
+}
+.cert-card {
+  background: var(--surface); padding: 2rem 2.2rem;
+  display: flex; gap: 1.4rem;
+  transition: background .3s;
+  position: relative; overflow: hidden;
+}
+.cert-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 1px; background: linear-gradient(to right, var(--gold), transparent);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .5s;
+}
+.cert-card:hover { background: var(--surface2); }
+.cert-card:hover::before { transform: scaleX(1); }
+.cert-ico {
+  width: 48px; height: 48px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+  border: 1px solid var(--border);
+  background: var(--gold-dim);
+}
+.cert-body h4 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem; font-weight: 600; color: var(--text); margin-bottom: .3rem;
+}
+.cert-body p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+
+/* ── CONTACT ── */
+#contact {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  text-align: center; padding: 7rem 3.5rem;
+}
+#contact .section-label { justify-content: center; }
+#contact .section-label::before { display: none; }
+#contact h2.s-title { max-width: 700px; margin: 0 auto 1.5rem; }
+.contact-sub { font-size: 1rem; color: var(--text-muted); max-width: 460px; margin: 0 auto 3rem; line-height: 1.7; }
+.contact-grid {
+  display: flex; flex-wrap: wrap; gap: 1px;
+  background: var(--border); max-width: 700px; margin: 0 auto;
+  border: 1px solid var(--border);
+}
+.contact-link {
+  flex: 1; min-width: 160px;
+  display: flex; flex-direction: column; align-items: center;
+  gap: .5rem; padding: 1.8rem 1.5rem;
+  background: var(--surface2); color: var(--text-muted);
+  text-decoration: none;
+  transition: background .3s, color .3s;
+  font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em;
+}
+.contact-link .c-icon { font-size: 1.4rem; }
+.contact-link:hover { background: var(--gold); color: var(--bg); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--bg); border-top: 1px solid var(--border);
+  padding: 1.4rem 3.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.foot-left {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem; color: var(--text-muted);
+}
+.foot-right {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem; letter-spacing: 0.1em;
+  color: var(--text-sub); text-transform: uppercase;
+}
+
+/* ── REVEAL ── */
+.reveal { opacity: 0; transform: translateY(32px); transition: opacity .8s ease, transform .8s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ── TOAST ── */
+.toast {
+  position: fixed; bottom: 2rem; right: 2rem; z-index: 2000;
+  background: var(--gold); color: var(--bg);
+  padding: .9rem 1.6rem;
+  font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  display: flex; align-items: center; gap: .5rem;
+  transform: translateY(80px); opacity: 0;
+  transition: all .4s ease;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+.toast.show { transform: none; opacity: 1; }
+
+/* hamburger */
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: none; background: none; border: none; padding: .3rem; }
+.hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text); transition: all .3s; }
+
+@media (max-width: 960px) {
+  nav { padding: 1.1rem 1.5rem; }
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; }
+  section { padding: 4rem 1.5rem; }
+  #hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-right { display: none; }
+  .hero-left { padding: 7rem 1.5rem 4rem; border-right: none; }
+  #about { grid-template-columns: 1fr; gap: 3rem; }
+  .blog-grid { grid-template-columns: 1fr; }
+  .blog-card.featured { grid-row: span 1; }
+  .cert-grid { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  footer { flex-direction: column; gap: .5rem; text-align: center; padding: 1.2rem; }
+  .form-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Muhammad Kaif Siddiqui<span class="dot"> ✦</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#blog">Blog</a></li>
+    <li><a href="#visuals">Visuals</a></li>
+    <li><a href="#certifications">Credentials</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:siddiquikaifamu@gmail.com" class="nav-cta">Get in Touch</a>
+  <button class="hamburger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+
+  <div class="hero-left">
+    <div class="hero-eyebrow">Food Technologist &nbsp;·&nbsp; AMU Aligarh</div>
+    <div class="hero-name-wrap"><span class="hero-name">Muhammad</span></div>
+    <div class="hero-name-wrap"><span class="hero-name hero-name-em">Kaif Siddiqui</span></div>
+    <p class="hero-subtitle">Quality Assurance · Food Safety · Packaging · Process Systems</p>
+    <p class="hero-desc">Bridging the gap between food science and real-world manufacturing — from HACCP frameworks and GMP audits to fibre-enriched gluten-free product development.</p>
+    <div class="hero-actions">
+      <a href="#blog" class="btn-gold">✦ Read My Blog</a>
+      <a href="#contact" class="btn-outline">Let's Connect →</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-stats">
+      <div class="stat-row">
+        <div class="stat-num">4+</div>
+        <div class="stat-text"><h4>Certifications</h4><p>HACCP, Allergen, FSSC 22000, Coursera</p></div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-num">B.Tech</div>
+        <div class="stat-text"><h4>Food Technology</h4><p>Aligarh Muslim University · 2021–2026</p></div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-num">2026</div>
+        <div class="stat-text"><h4>Graduating</h4><p>ZHCET, AMU · Final Year</p></div>
+      </div>
+    </div>
+    <div class="hero-cards">
+      <div class="hero-mini-card">
+        <div class="hero-mini-label">Latest Experience</div>
+        <h3>ITC Limited, Haridwar</h3>
+        <p>QA & Process Improvement Trainee · Snacks & Noodles Unit</p>
+        <span class="hero-mini-pill">Jun – Aug 2025</span>
+      </div>
+      <div class="hero-mini-card">
+        <div class="hero-mini-label">Current Research</div>
+        <h3>Gluten-Free Cookie Development</h3>
+        <p>Sorghum–Chiku Peel Composite Flour · AMU Centre for Food Science</p>
+        <span class="hero-mini-pill">Ongoing · 2025–Present</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-bar">
+  <div class="marquee-track" id="marqueeTrack">
+    <span>HACCP Implementation</span>
+    <span>GMP Audits</span>
+    <span>FSSC 22000 v6</span>
+    <span>Allergen Management</span>
+    <span>FMEA & Root Cause Analysis</span>
+    <span>Packaging Quality</span>
+    <span>Product Development</span>
+    <span>Gluten-Free Formulation</span>
+    <span>QA/QC Systems</span>
+    <span>Food Safety Culture</span>
+    <span>HACCP Implementation</span>
+    <span>GMP Audits</span>
+    <span>FSSC 22000 v6</span>
+    <span>Allergen Management</span>
+    <span>FMEA & Root Cause Analysis</span>
+    <span>Packaging Quality</span>
+    <span>Product Development</span>
+    <span>Gluten-Free Formulation</span>
+    <span>QA/QC Systems</span>
+    <span>Food Safety Culture</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-text reveal">
+    <div class="section-label"><span class="section-num">01 /</span> About Me</div>
+    <h2 class="s-title">Where Science<br>Meets <em>Sustenance</em></h2>
+    <p>I'm a final-year Food Technology student at Aligarh Muslim University, with hands-on industry experience at ITC Limited's Haridwar manufacturing plant. My work sits at the intersection of quality systems, food safety compliance, and product development.</p>
+    <p>During my training at ITC, I led a packaging quality improvement project targeting leakage reduction and infestation risk control — applying FMEA and Root Cause Analysis to eliminate real defects on the production line.</p>
+    <p>Beyond the shop floor, I'm developing fibre-enriched gluten-free cookies using sorghum and chiku peel flour — exploring how underutilized ingredients can create functional foods for diverse dietary needs.</p>
+    <div class="skills-wrap">
+      <p class="skills-label">Core Competencies</p>
+      <div class="skills-list">
+        <span class="skill-chip">QA/QC</span>
+        <span class="skill-chip">GMP & HACCP</span>
+        <span class="skill-chip">FSSC 22000 v6</span>
+        <span class="skill-chip">FMEA & RCA</span>
+        <span class="skill-chip">SOP & QMS</span>
+        <span class="skill-chip">Packaging Quality</span>
+        <span class="skill-chip">Allergen Management</span>
+        <span class="skill-chip">Line Audits</span>
+        <span class="skill-chip">Product Development</span>
+        <span class="skill-chip">Sensory Evaluation</span>
+      </div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="section-label"><span class="section-num">02 /</span> Timeline</div>
+    <h2 class="s-title"><em>Journey</em> &<br><strong>Milestones</strong></h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Aug 2025 – Present</div>
+        <h4>Academic Research · AMU</h4>
+        <p>Developing fibre-enriched gluten-free cookies using Sorghum–Chiku Peel composite flour at the Centre for Food Science & Technology.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Jun – Aug 2025</div>
+        <h4>QA Trainee · ITC Limited, Haridwar</h4>
+        <p>Led packaging quality improvement; conducted FMEA, RCA, GMP audits and supported CAPA & QMS documentation.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2024 – 2026</div>
+        <h4>Joint Coordinator · EDC, AMU</h4>
+        <p>Entrepreneurship Development Cell — fostering startup culture and innovation among students.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2022 – 2023</div>
+        <h4>Coordinator · The Wings of Desire (NGO)</h4>
+        <p>Led community initiatives and social impact programs as part of a student-run NGO.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2021 – 2026</div>
+        <h4>B.Tech Food Technology · AMU</h4>
+        <p>Zakir Husain College of Engineering & Technology, Aligarh Muslim University.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section id="blog">
+  <div class="blog-header-row reveal">
+    <div>
+      <div class="section-label"><span class="section-num">03 /</span> Blog & Articles</div>
+      <h2 class="s-title" style="margin-bottom:0">Thoughts on Food,<br><em>Science & Industry</em></h2>
+    </div>
+    <button class="write-new-btn" onclick="openModal()">✦ Write Article</button>
+  </div>
+  <div class="blog-grid reveal" id="blogGrid"></div>
+</section>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="writeModal">
+  <div class="modal">
+    <div class="modal-hd">
+      <h3>New Article</h3>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Title *</label>
+        <input type="text" id="postTitle" placeholder="Article title…" />
+      </div>
+      <div class="form-group">
+        <label>Category</label>
+        <select id="postCategory">
+          <option>Food Safety</option>
+          <option>Product Development</option>
+          <option>Industry Insights</option>
+          <option>Research</option>
+          <option>Career</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Excerpt</label>
+      <input type="text" id="postExcerpt" placeholder="A one-line summary…" />
+    </div>
+    <div class="form-group">
+      <label>Content *</label>
+      <textarea id="postContent" placeholder="Write your article… Use ## for headings."></textarea>
+    </div>
+    <button class="publish-btn" onclick="publishPost()">Publish Article →</button>
+  </div>
+</div>
+
+<!-- BLOG FULL -->
+<div class="blog-full" id="blogFull">
+  <div class="blog-full-inner">
+    <button class="back-btn" onclick="closeBlogFull()">← Back to Blog</button>
+    <div id="blogFullContent"></div>
+  </div>
+</div>
+
+<!-- VISUALS -->
+<section id="visuals">
+  <div class="reveal">
+    <div class="section-label"><span class="section-num">04 /</span> Gallery</div>
+    <h2 class="s-title">Visuals &<br><em>Moments</em></h2>
+  </div>
+  <label class="upload-zone reveal">
+    <input type="file" id="fileInput" accept="image/*" multiple onchange="handleUpload(event)" />
+    <div class="upload-icon">📷</div>
+    <p><strong>Click to upload photos</strong> — lab work, field visits, events</p>
+    <small>JPG, PNG, WEBP · Up to 10MB each</small>
+  </label>
+  <div class="gallery-grid reveal" id="galleryGrid">
+    <div class="g-placeholder"><span>🌾</span><span>Lab Work</span></div>
+    <div class="g-placeholder"><span>🏭</span><span>Industry</span></div>
+    <div class="g-placeholder"><span>🔬</span><span>Research</span></div>
+    <div class="g-placeholder"><span>🎓</span><span>Campus</span></div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-label reveal"><span class="section-num">05 /</span> Credentials</div>
+  <h2 class="s-title reveal">Certifications &<br><em>Training</em></h2>
+  <div class="cert-grid reveal">
+    <div class="cert-card">
+      <div class="cert-ico">🛡️</div>
+      <div class="cert-body">
+        <h4>HACCP Implementation</h4>
+        <p>FICSI & NIFTEM-K — Hazard Analysis and Critical Control Points</p>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-ico">⚗️</div>
+      <div class="cert-body">
+        <h4>Allergen Management</h4>
+        <p>FICSI & NIFTEM-K — Allergen Management in Food Manufacturing</p>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-ico">📋</div>
+      <div class="cert-body">
+        <h4>FSSC 22000 Version 6</h4>
+        <p>FICSI & NIFTEM-K — Food Safety Management Systems</p>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-ico">🌐</div>
+      <div class="cert-body">
+        <h4>Food Safety Management Systems</h4>
+        <p>Coursera — Internationally recognized online certification</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label reveal">Contact</div>
+  <h2 class="s-title reveal">Let's Build Something<br><em>Together</em></h2>
+  <p class="contact-sub reveal">Open to QA/QC, Food Safety, and R&D roles. Always happy to connect with fellow food science enthusiasts and professionals.</p>
+  <div class="contact-grid reveal">
+    <a class="contact-link" href="mailto:siddiquikaifamu@gmail.com">
+      <span class="c-icon">📧</span>Email Me
+    </a>
+    <a class="contact-link" href="tel:+919628831775">
+      <span class="c-icon">📞</span>Call Me
+    </a>
+    <a class="contact-link" href="https://www.linkedin.com/in/muhammad-kaif-s-05779a191/" target="_blank">
+      <span class="c-icon">💼</span>LinkedIn
+    </a>
+    <a class="contact-link" href="#">
+      <span class="c-icon">📄</span>Resume
+    </a>
+  </div>
+</section>
+
+<!-- THEME SWITCHER -->
+<div class="theme-switcher">
+  <div class="theme-palette" id="themePalette">
+    <div class="palette-label">Choose Theme</div>
+    <div class="theme-opt active" data-theme="dark" onclick="setTheme('dark', this)">
+      <div class="theme-swatch" style="background:linear-gradient(135deg,#0A0A08,#C8A96E)"></div>
+      Dark Gold
+    </div>
+    <div class="theme-opt" data-theme="cream" onclick="setTheme('cream', this)">
+      <div class="theme-swatch" style="background:linear-gradient(135deg,#FAF7F2,#A8722A)"></div>
+      Light Cream
+    </div>
+    <div class="theme-opt" data-theme="forest" onclick="setTheme('forest', this)">
+      <div class="theme-swatch" style="background:linear-gradient(135deg,#0D1410,#6AAF7C)"></div>
+      Forest
+    </div>
+    <div class="theme-opt" data-theme="ocean" onclick="setTheme('ocean', this)">
+      <div class="theme-swatch" style="background:linear-gradient(135deg,#090C14,#5B9FD4)"></div>
+      Ocean
+    </div>
+    <div class="theme-opt" data-theme="crimson" onclick="setTheme('crimson', this)">
+      <div class="theme-swatch" style="background:linear-gradient(135deg,#120808,#C4503A)"></div>
+      Crimson
+    </div>
+  </div>
+  <button class="theme-toggle-btn" onclick="togglePalette()" id="themeToggleBtn">
+    <div class="t-dot"></div>
+    Theme
+  </button>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="foot-left">© 2025 Muhammad Kaif Siddiqui</span>
+  <span class="foot-right">Food Technologist · AMU · Aligarh, India</span>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ─── CUSTOM CURSOR ───────────────────────────────────────────
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx+'px'; cursor.style.top = my+'px'; });
+(function animRing() {
+  rx += (mx - rx) * 0.14;
+  ry += (my - ry) * 0.14;
+  ring.style.left = rx+'px'; ring.style.top = ry+'px';
+  requestAnimationFrame(animRing);
+})();
+document.querySelectorAll('a,button,[class*="card"],[class*="btn"],[class*="chip"],[class*="item"]').forEach(el => {
+  el.addEventListener('mouseenter', () => { cursor.style.width='16px'; cursor.style.height='16px'; ring.style.width='60px'; ring.style.height='60px'; ring.style.borderColor='rgba(200,169,110,0.9)'; });
+  el.addEventListener('mouseleave', () => { cursor.style.width='8px'; cursor.style.height='8px'; ring.style.width='36px'; ring.style.height='36px'; ring.style.borderColor='rgba(200,169,110,0.5)'; });
+});
+
+// ─── DATA ────────────────────────────────────────────────────
+let posts = [
+  { id:1, title:"Why HACCP is the Backbone of Modern Food Manufacturing", category:"Food Safety",
+    excerpt:"A deep dive into how Hazard Analysis and Critical Control Points transforms production lines from reactive to proactive.",
+    content:`## The Problem with Reactive Quality Control\n\nFor decades, food manufacturers relied on end-of-line testing. Products were made, then checked. If something failed, it was caught — but only after it was produced. This approach is fundamentally flawed.\n\n## Enter HACCP\n\nHazard Analysis and Critical Control Points shifts the paradigm entirely. Instead of testing your way to safety, you build safety into every step of the process. You identify where hazards can enter — biological, chemical, physical — and you control those points with precision.\n\n## My Experience at ITC Limited\n\nDuring my training at ITC's Haridwar plant, I saw HACCP principles in action every day. From incoming raw material checks to in-process monitoring of critical parameters like sealing temperatures and moisture content, each step was documented, tracked, and reviewed.\n\nThe most valuable lesson? A HACCP plan is only as good as the people implementing it. Training, culture, and consistent follow-through matter just as much as the documented procedures.\n\n## The Road Ahead\n\nAs the food industry faces new challenges — from supply chain complexity to emerging allergens — HACCP frameworks will only grow more important. For any food technologist, mastering HACCP isn't optional; it's foundational.`,
+    date:"March 2025", readTime:"5 min read", icon:"🛡️", featured:true },
+  { id:2, title:"Gluten-Free Baking: The Science of Sorghum Flour", category:"Research",
+    excerpt:"What I've learned developing composite gluten-free flour blends at AMU's food science lab.",
+    content:`## The Gluten-Free Challenge\n\nGluten gives dough its elasticity and structure. Remove it, and baking becomes a completely different game. The challenge isn't just formulation — it's understanding why conventional baking behaves the way it does, and then replicating that behavior with entirely different ingredients.\n\n## Why Sorghum?\n\nSorghum (jowar) is a nutritional powerhouse — high in fibre, protein, and antioxidants. It's also naturally gluten-free and abundantly available in India. When combined with upcycled chiku peel flour (rich in dietary fibre and bioactives), we create a composite that punches well above its weight nutritionally.\n\n## What We're Optimizing\n\nIn our current research at AMU, we're evaluating water absorption capacity, oil absorption, swelling power, and dough handling characteristics across different blend ratios. Texture, crumb structure, and sensory acceptability are our final measures of success.\n\n## Early Findings\n\nInitial results are promising. The inclusion of chiku peel flour at 10–15% substitution levels improves fibre content without significantly compromising texture. The cookies exhibit acceptable hardness and pleasant sensory profiles in preliminary evaluation.`,
+    date:"February 2025", readTime:"4 min read", icon:"🌾", featured:false },
+  { id:3, title:"From Campus to Shop Floor: My ITC Internship", category:"Career",
+    excerpt:"Lessons from real FMCG manufacturing that no textbook can fully prepare you for.",
+    content:`## The Gap Between Theory and Practice\n\nFood technology programs are rigorous. We study unit operations, food chemistry, microbiology, and quality systems in depth. But nothing truly prepares you for the rhythm of a manufacturing plant — the noise, the pace, the stakes.\n\n## Week One\n\nMy first week at ITC's Haridwar snacks and noodles unit was humbling. I knew what FMEA stood for; I had never actually run one. I understood GMP principles; I had never traced a deviation through a full investigation cycle.\n\n## The Project\n\nI was assigned to a packaging quality improvement project targeting leakage, infestation risk, and weight variation. Using FMEA methodology, we mapped every potential failure mode. Each received a Risk Priority Number. The highest-priority items became our corrective action roadmap.\n\n## What I Took Away\n\nCross-functional collaboration is everything. QA cannot solve problems in isolation — you need production supervisors, maintenance engineers, and procurement teams aligned. The best QA professionals I met at ITC were excellent communicators first, technical experts second.`,
+    date:"January 2025", readTime:"6 min read", icon:"🏭", featured:false }
+];
+
+// ─── RENDER ──────────────────────────────────────────────────
+function renderBlog() {
+  const grid = document.getElementById('blogGrid');
+  grid.innerHTML = '';
+  posts.forEach((post, i) => {
+    const card = document.createElement('div');
+    card.className = 'blog-card' + (i === 0 ? ' featured' : '');
+    card.onclick = () => openPost(post.id);
+    card.innerHTML = `
+      <div class="bc-cat">${post.category}</div>
+      <div class="bc-icon">${post.icon}</div>
+      <h3 class="bc-title">${post.title}</h3>
+      <p class="bc-excerpt">${post.excerpt}</p>
+      <div class="bc-footer">
+        <span class="bc-meta">${post.date} · ${post.readTime}</span>
+        <span class="bc-read">Read <span class="arrow">→</span></span>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+// ─── MODAL ───────────────────────────────────────────────────
+function openModal() {
+  document.getElementById('writeModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('writeModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('writeModal').addEventListener('click', e => { if (e.target === document.getElementById('writeModal')) closeModal(); });
+
+function publishPost() {
+  const title = document.getElementById('postTitle').value.trim();
+  const content = document.getElementById('postContent').value.trim();
+  if (!title || !content) { alert('Please fill in title and content.'); return; }
+  const icons = ['📝','🔬','🌱','🏭','💡','📊'];
+  const newPost = {
+    id: Date.now(), title,
+    category: document.getElementById('postCategory').value,
+    excerpt: document.getElementById('postExcerpt').value || content.substring(0, 120) + '…',
+    content,
+    date: new Date().toLocaleDateString('en-GB', { month: 'long', year: 'numeric' }),
+    readTime: Math.max(1, Math.ceil(content.split(' ').length / 200)) + ' min read',
+    icon: icons[Math.floor(Math.random() * icons.length)],
+    featured: false
+  };
+  posts.unshift(newPost);
+  renderBlog();
+  closeModal();
+  ['postTitle','postExcerpt','postContent'].forEach(id => document.getElementById(id).value = '');
+  showToast('✦ Article published!');
+}
+
+// ─── POST VIEW ───────────────────────────────────────────────
+function openPost(id) {
+  const post = posts.find(p => p.id === id);
+  if (!post) return;
+  const formatted = post.content.split('\n').map(line => {
+    if (line.startsWith('## ')) return `<h2>${line.slice(3)}</h2>`;
+    if (line.trim() === '') return '';
+    return `<p>${line}</p>`;
+  }).join('');
+  document.getElementById('blogFullContent').innerHTML = `
+    <div class="bf-cat">${post.category}</div>
+    <h1>${post.title}</h1>
+    <p class="bf-meta">${post.date} · ${post.readTime}</p>
+    <div class="bf-content">${formatted}</div>`;
+  document.getElementById('blogFull').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('blogFull').scrollTop = 0;
+}
+function closeBlogFull() {
+  document.getElementById('blogFull').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ─── GALLERY ─────────────────────────────────────────────────
+function handleUpload(e) {
+  const files = Array.from(e.target.files);
+  const grid = document.getElementById('galleryGrid');
+  grid.querySelectorAll('.g-placeholder').forEach(p => p.remove());
+  files.forEach(file => {
+    const reader = new FileReader();
+    reader.onload = ev => {
+      const item = document.createElement('div');
+      item.className = 'g-item';
+      item.innerHTML = `<img src="${ev.target.result}" alt="${file.name}"/><div class="g-overlay"><span class="g-label">${file.name.replace(/\.[^.]+$/,'')}</span></div>`;
+      grid.prepend(item);
+    };
+    reader.readAsDataURL(file);
+  });
+  showToast(`📷 ${files.length} photo${files.length > 1 ? 's' : ''} added`);
+}
+
+// ─── TOAST ───────────────────────────────────────────────────
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3200);
+}
+
+// ─── SCROLL REVEAL ───────────────────────────────────────────
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ─── MOBILE MENU ─────────────────────────────────────────────
+function toggleMobileMenu() {
+  alert('About · Blog · Visuals · Credentials · Contact');
+}
+
+// ─── THEME SWITCHER ──────────────────────────────────────────
+const themeMap = {
+  dark:    { label: 'Dark Gold',    dot: '#C8A96E' },
+  cream:   { label: 'Light Cream',  dot: '#A8722A' },
+  forest:  { label: 'Forest',       dot: '#6AAF7C' },
+  ocean:   { label: 'Ocean',        dot: '#5B9FD4' },
+  crimson: { label: 'Crimson',      dot: '#C4503A' },
+};
+let paletteOpen = false;
+
+function setTheme(theme, el) {
+  const root = document.documentElement;
+  if (theme === 'dark') root.removeAttribute('data-theme');
+  else root.setAttribute('data-theme', theme);
+  // update active state
+  document.querySelectorAll('.theme-opt').forEach(o => o.classList.remove('active'));
+  if (el) el.classList.add('active');
+  // update dot color on toggle button
+  document.querySelector('.theme-toggle-btn .t-dot').style.background = themeMap[theme].dot;
+  // update cursor ring color
+  ring.style.borderColor = themeMap[theme].dot + '80';
+  cursor.style.background = themeMap[theme].dot;
+  // store preference
+  localStorage.setItem('kaif-theme', theme);
+  closePalette();
+  showToast('🎨 ' + themeMap[theme].label + ' theme applied');
+}
+
+function togglePalette() {
+  paletteOpen = !paletteOpen;
+  document.getElementById('themePalette').classList.toggle('open', paletteOpen);
+}
+function closePalette() {
+  paletteOpen = false;
+  document.getElementById('themePalette').classList.remove('open');
+}
+document.addEventListener('click', e => {
+  if (!e.target.closest('.theme-switcher')) closePalette();
+});
+
+// restore saved theme
+(function() {
+  const saved = localStorage.getItem('kaif-theme') || 'dark';
+  const el = document.querySelector(`.theme-opt[data-theme="${saved}"]`);
+  setTheme(saved, el);
+})();
+
+// ─── INIT ────────────────────────────────────────────────────
+renderBlog();
+</script>
+</body>
+</html>
